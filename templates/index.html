@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <title>Document</title>
+</head>
+<body >
+<div>
+<div class="row">
+    <div class="col-sm-6 offset-sm-6">
+
+<div style="overflow-y:auto">
+
+    {% for task in tasks %}
+    <div class="card bg-info" style="width:100%">
+        <h2>{{task.title}}</h2>
+        <hr>
+        
+        <p>{{task.details}}</p>
+        <div class="container">
+        <div class="row">
+        <div class="col-sm|md|lg|xl-2">
+        <form action="/delete" method="GET">
+            <input type="hidden" name="taskid" value="{{task.id}}">
+            <button value="remove" type="submit"  class="btn btn-danger" > &nbsp; Delete</button>
+          </form>
+        </div>
+        <div class="col-sm|md|lg|xl-2">
+          <form action="/edit" method="GET">
+            <input type="hidden" name="taskid" value="{{task.id}}">
+            <button value="remove" type="submit"  class="btn btn-warning" > &nbsp; Update</button>
+          </form>
+          </div>
+    </div>
+</div>
+</div>
+    <br>
+    
+    {% endfor %}
+</div>
+</div>
+<div class="col-sm-6 col-2 fixed-top one" style="top: 10%;">
+<div style="position:sticky;text-align:center">
+<div style="box-shadow: 3px 6px 10px #888888;width:auto; padding:10px;border-radius:10px">
+<form method="POST" action="">
+    <h2>Add Task</h2>
+    <div class="form-group">
+    {% csrf_token %}
+    {{ form.as_p }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  
+  
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
